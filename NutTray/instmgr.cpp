@@ -20,7 +20,7 @@
 #include "wintray.h"
 #include <stdio.h>
 
-const TCHAR *InstanceManager::INSTANCES_KEY = TEXT("Software\\Apcupsd\\Apctray\\instances");
+const TCHAR *InstanceManager::INSTANCES_KEY = TEXT("Software\\Nutupsd\\nuttray\\instances");
 
 const MonitorConfig InstanceManager::DEFAULT_CONFIG =
 {
