@@ -282,7 +282,7 @@ bool InstanceManager::IsAutoStart()
 
 void InstanceManager::SetAutoStart(bool start)
 {
-   HKEY runkey;
+   HKEY runkey= 0;
    if (start)
    {
       // Get the full path/filename of this executable
