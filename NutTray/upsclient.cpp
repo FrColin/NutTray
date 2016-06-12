@@ -931,7 +931,7 @@ int upscli_disconnect(UPSCONN *ups)
 
 		/* try to disconnect gracefully */
 		net_write(ups, "LOGOUT\n", 7);
-
+		Sleep(100);
 		upscli_closefd(ups);
 	}
 

@@ -40,11 +40,13 @@ bool StatMgr::Update()
    int tries;
    for (tries = 2; tries; tries--)
    {
-      if (upscli_connect(&m_ups, m_host.c_str(), m_port,0)) {
-         // Hard failure: bail immediately
-         unlock();
-         return false;
-      }
+	   if (m_ups.fd == INVALID_SOCKET) {
+		   if (upscli_connect(&m_ups, m_host.c_str(), m_port, 0)) {
+			   // Hard failure: bail immediately
+			   unlock();
+			   return false;
+		   }
+	   }
 	  const char *query_ups[] = { "UPS" };
 	  if ( upscli_list_start(&m_ups, 1, query_ups)<0) {
          // Soft failure: close and try again
