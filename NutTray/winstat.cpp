@@ -39,8 +39,8 @@ void upsStatus::Show()
       DialogBoxParam(_appinst,
                      MAKEINTRESOURCE(IDD_STATUS),
                      NULL,
-                     (DLGPROC)DialogProc,
-                     (LONG)this);
+                     (DLGPROC) DialogProc,
+                     (LPARAM) this);
    }
 }
 
@@ -59,13 +59,13 @@ BOOL CALLBACK upsStatus::DialogProc(
    {
       // Set dialog user data to our "this" pointer which comes in via lParam.
       // On subsequent calls, this will be retrieved by the code below.
-      SetWindowLong(hwnd, GWL_USERDATA, lParam);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       _this = (upsStatus *)lParam;
    }
    else
    {
       // We've previously been initialized, so retrieve pointer from user data
-      _this = (upsStatus *)GetWindowLong(hwnd, GWL_USERDATA);
+      _this = (upsStatus *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
    }
 
    // Call thru to non-static member function

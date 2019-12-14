@@ -20,6 +20,7 @@
 #define __LISTVIEW_H
 
 #include <windows.h>
+#include <string>
 #include <list>
 using namespace std;
 

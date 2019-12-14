@@ -19,6 +19,7 @@
 // Implementation of the Config dialog
 
 #include <windows.h>
+#include <WinUser.h>
 #include <commctrl.h>
 #include <stdio.h>
 #include "winconfig.h"
@@ -50,8 +51,8 @@ void upsConfig::Show(MonitorConfig &mcfg)
       DialogBoxParam(_appinst,
                      MAKEINTRESOURCE(IDD_CONFIG),
                      NULL,
-                     (DLGPROC)DialogProc,
-                     (LONG)this);
+                     (DLGPROC) DialogProc,
+                     (LPARAM) this);
    }
 }
 
@@ -70,13 +71,13 @@ BOOL CALLBACK upsConfig::DialogProc(
    {
       // Set dialog user data to our "this" pointer which comes in via lParam.
       // On subsequent calls, this will be retrieved by the code below.
-      SetWindowLong(hwnd, GWL_USERDATA, lParam);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       _this = (upsConfig *)lParam;
    }
    else
    {
       // We've previously been initialized, so retrieve pointer from user data
-      _this = (upsConfig *)GetWindowLong(hwnd, GWL_USERDATA);
+      _this = (upsConfig *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
    }
 
    // Call thru to non-static member function
@@ -174,7 +175,8 @@ BOOL upsConfig::DialogProcess(
           ((HWND)lParam == _hrefresh && !_refreshvalid))
       {
          SetBkColor((HDC)wParam, RGB(255,0,0));
-         return (BOOL)CreateSolidBrush(RGB(255,0,0));
+         HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
+         return (BOOL)(brush != NULL);
       }
       return FALSE;
    }

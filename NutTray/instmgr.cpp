@@ -20,6 +20,9 @@
 #include "wintray.h"
 #include <stdio.h>
 
+ // Need to link with Rpcrt4.lib
+#pragma comment(lib, "Rpcrt4.lib")
+
 const TCHAR *InstanceManager::INSTANCES_KEY = TEXT("Software\\Nutupsd\\nuttray\\instances");
 
 const MonitorConfig InstanceManager::DEFAULT_CONFIG =
@@ -199,7 +202,7 @@ list<InstanceManager::InstanceConfig>::iterator
    return _instances.end();
 }
 
-int InstanceManager::RemoveInstance(const string & id)
+size_t InstanceManager::RemoveInstance(const string & id)
 {
    list<InstanceConfig>::iterator inst = FindInstance(id);
    if (inst != _instances.end())

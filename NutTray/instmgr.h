@@ -43,7 +43,7 @@ public:
    ~InstanceManager();
 
    void CreateMonitors();
-   int RemoveInstance(const string & id);
+   size_t RemoveInstance(const string & id);
    void AddInstance();
    void UpdateInstance(const MonitorConfig &mcfg);
    void RemoveAll();

@@ -18,6 +18,9 @@
 
 #include <windows.h>
 
+ // Need to link with Ws2_32.lib
+#pragma comment(lib, "ws2_32.lib")
+
 #include <string>
 #include "wintray.h"
 #include "resource.h"

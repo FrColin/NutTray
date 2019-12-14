@@ -70,7 +70,7 @@ upsMenu::upsMenu(HINSTANCE appinst, MonitorConfig &mcfg, BalloonMgr *balmgr,
    }
 
    // record which client created this window
-   SetWindowLong(_hwnd, GWL_USERDATA, (LONG)this);
+   SetWindowLongPtr(_hwnd, GWLP_USERDATA, (LPARAM) this);
 
    // Load the icons for the tray
    _online_icon = LoadIcon(appinst, MAKEINTRESOURCE(IDI_ONLINE));
@@ -216,7 +216,7 @@ LRESULT CALLBACK upsMenu::WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lP
    // This is a static method, so we don't know which instantiation we're 
    // dealing with. We use Allen Hadden's (ahadden@taratec.com) suggestion 
    // from a newsgroup to get the pseudo-this.
-   upsMenu *_this = (upsMenu *) GetWindowLong(hwnd, GWL_USERDATA);
+   upsMenu *_this = (upsMenu *) GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
    // During creation, we are called before the WindowLong has been set.
    // Just use default processing in that case since _this is not valid.   

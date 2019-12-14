@@ -36,7 +36,7 @@ void upsAbout::Show()
                      MAKEINTRESOURCE(IDD_ABOUT), 
                      NULL,
                     (DLGPROC) DialogProc,
-                    (LONG) this);
+                    (LPARAM) this);
    }
 }
 
@@ -48,14 +48,14 @@ BOOL CALLBACK upsAbout::DialogProc(
 {
    // We use the dialog-box's USERDATA to store a _this pointer
    // This is set only once WM_INITDIALOG has been recieved, though!
-   upsAbout *_this = (upsAbout *)GetWindowLong(hwnd, GWL_USERDATA);
+   upsAbout *_this = (upsAbout *)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
    switch (uMsg)
    {
    case WM_INITDIALOG:
       // Retrieve the Dialog box parameter and use it as a pointer
       // to the calling vncProperties object
-      SetWindowLong(hwnd, GWL_USERDATA, lParam);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       _this = (upsAbout *)lParam;
 
       // Show the dialog
